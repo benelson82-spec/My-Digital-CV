@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ben Elson – Global TA Leader</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --c1: #FF6B6B; --c2: #FFE66D; --c3: #4ECDC4;
+  --c4: #45B7D1; --c5: #96CEB4; --c6: #FF8B94;
+  --c7: #A8E6CF; --c8: #FFD3A5; --dark: #1a1a2e;
+  --mid: #16213e; --text: #f0f0f0;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+#cursor {
+  width: 20px; height: 20px;
+  border: 3px solid var(--c1);
+  border-radius: 50%;
+  position: fixed; pointer-events: none; z-index: 99999;
+  transition: transform 0.1s, border-color 0.3s;
+  mix-blend-mode: difference;
+}
+#cursor-dot {
+  width: 6px; height: 6px;
+  background: var(--c2);
+  border-radius: 50%;
+  position: fixed; pointer-events: none; z-index: 99999;
+}
+#cursor-trail {
+  width: 40px; height: 40px;
+  border: 1px dashed var(--c3);
+  border-radius: 50%;
+  position: fixed; pointer-events: none; z-index: 99998;
+  opacity: 0.4;
+  transition: all 0.15s ease;
+}
+body:has(a:hover) #cursor, body:has(button:hover) #cursor {
+  transform: scale(2.5);
+  border-color: var(--c2);
+}
+
+/* ── FLOATING SHAPES BG ── */
+.bg-shapes { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.07;
+  animation: floatShape linear infinite;
+}
+@keyframes floatShape {
+  0% { transform: translateY(110vh) rotate(0deg); }
+  100% { transform: translateY(-20vh) rotate(720deg); }
+}
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+  text-align: center;
+  padding: 40px 20px;
+  overflow: hidden;
+}
+
+.hero-bg-text {
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(100px, 20vw, 280px);
+  color: rgba(255,255,255,0.03);
+  letter-spacing: -0.02em;
+  user-select: none;
+  white-space: nowrap;
+  animation: slideText 20s linear infinite;
+}
+@keyframes slideText {
+  0% { transform: translateX(100vw); }
+  100% { transform: translateX(-100vw); }
+}
+.hero-bg-text:nth-child(2) { top: 40%; animation-duration: 15s; animation-direction: reverse; }
+
+.hero-tag {
+  display: inline-block;
+  background: var(--c1);
+  color: var(--dark);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 100px;
+  margin-bottom: 24px;
+  animation: bounceIn 0.6s 0.2s both;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+  60% { transform: scale(1.2) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+h1.hero-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(70px, 14vw, 160px);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, var(--c1), var(--c2), var(--c3), var(--c4));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 300% 300%;
+  animation: gradientShift 4s ease infinite, flyInDown 0.8s 0.4s both;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes flyInDown {
+  from { transform: translateY(-120px) rotate(-5deg); opacity: 0; }
+  to { transform: translateY(0) rotate(0deg); opacity: 1; }
+}
+
+.hero-title {
+  font-size: clamp(16px, 3vw, 26px);
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  margin-top: 12px;
+  animation: flyInUp 0.8s 0.6s both;
+}
+
+@keyframes flyInUp {
+  from { transform: translateY(60px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* TYPEWRITER */
+.typewriter-wrap {
+  margin-top: 32px;
+  font-size: clamp(18px, 3vw, 28px);
+  font-weight: 600;
+  min-height: 40px;
+  animation: flyInUp 0.8s 0.8s both;
+}
+.typewriter-prefix { color: var(--c2); }
+#typewriter { color: var(--c3); border-right: 3px solid var(--c3); padding-right: 4px; }
+
+/* HERO LINKS */
+.hero-links {
+  display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; justify-content: center;
+  animation: flyInUp 0.8s 1s both;
+}
+.hero-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px;
+  border-radius: 100px;
+  font-weight: 600; font-size: 14px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: none;
+}
+.hero-btn:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+.hero-btn.primary { background: var(--c1); color: var(--dark); }
+.hero-btn.secondary { background: transparent; border: 2px solid var(--c3); color: var(--c3); }
+
+/* SCROLL INDICATOR */
+.scroll-indicator {
+  position: absolute; bottom: 40px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  animation: pulse 2s infinite;
+  color: rgba(255,255,255,0.4); font-size: 12px; letter-spacing: 0.1em;
+}
+.scroll-arrow { font-size: 24px; animation: bounce 1.5s infinite; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+@keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(26,26,46,0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0 40px;
+}
+.nav-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 0; overflow-x: auto; }
+nav a {
+  color: rgba(255,255,255,0.5);
+  text-decoration: none; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 18px 20px; display: block;
+  white-space: nowrap;
+  transition: color 0.2s;
+  position: relative; cursor: none;
+}
+nav a::after {
+  content: ''; position: absolute; bottom: 0; left: 20px; right: 20px;
+  height: 3px; border-radius: 3px;
+  background: linear-gradient(90deg, var(--c1), var(--c2));
+  transform: scaleX(0); transition: transform 0.25s ease;
+}
+nav a:hover { color: #fff; }
+nav a:hover::after { transform: scaleX(1); }
+
+/* ── SECTIONS ── */
+main { position: relative; z-index: 1; }
+
+section {
+  max-width: 1100px; margin: 0 auto;
+  padding: 100px 40px;
+}
+
+.section-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.25em;
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 8vw, 96px);
+  line-height: 0.95; letter-spacing: 0.02em;
+  margin-bottom: 48px;
+}
+
+/* FLY-IN CLASSES */
+.fly-left { opacity: 0; transform: translateX(-100px); transition: all 0.7s cubic-bezier(0.22,1,0.36,1); }
+.fly-right { opacity: 0; transform: translateX(100px); transition: all 0.7s cubic-bezier(0.22,1,0.36,1); }
+.fly-up { opacity: 0; transform: translateY(60px); transition: all 0.7s cubic-bezier(0.22,1,0.36,1); }
+.fly-down { opacity: 0; transform: translateY(-60px); transition: all 0.7s cubic-bezier(0.22,1,0.36,1); }
+.zoom-in { opacity: 0; transform: scale(0.7); transition: all 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+.spin-in { opacity: 0; transform: rotate(-180deg) scale(0.5); transition: all 0.7s cubic-bezier(0.34,1.56,0.64,1); }
+.visible { opacity: 1 !important; transform: none !important; }
+
+/* STAGGER DELAYS */
+.d1{transition-delay:0.1s} .d2{transition-delay:0.2s} .d3{transition-delay:0.3s}
+.d4{transition-delay:0.4s} .d5{transition-delay:0.5s} .d6{transition-delay:0.6s}
+
+/* ── STATS ── */
+#stats { background: linear-gradient(135deg, var(--mid), #0d1b2a); }
+.stats-wrap { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
+.stats-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px;
+}
+.stat-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 32px 24px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s, background 0.3s;
+  position: relative; overflow: hidden; cursor: none;
+}
+.stat-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(255,255,255,0.04));
+  opacity: 0; transition: opacity 0.3s;
+}
+.stat-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
+.stat-card:hover::before { opacity: 1; }
+.stat-card:nth-child(1) { border-top: 3px solid var(--c1); }
+.stat-card:nth-child(1):hover { border-color: var(--c1); box-shadow: 0 24px 60px rgba(255,107,107,0.2); }
+.stat-card:nth-child(2) { border-top: 3px solid var(--c2); }
+.stat-card:nth-child(2):hover { box-shadow: 0 24px 60px rgba(255,230,109,0.2); }
+.stat-card:nth-child(3) { border-top: 3px solid var(--c3); }
+.stat-card:nth-child(3):hover { box-shadow: 0 24px 60px rgba(78,205,196,0.2); }
+.stat-card:nth-child(4) { border-top: 3px solid var(--c4); }
+.stat-card:nth-child(4):hover { box-shadow: 0 24px 60px rgba(69,183,209,0.2); }
+.stat-card:nth-child(5) { border-top: 3px solid var(--c5); }
+.stat-card:nth-child(5):hover { box-shadow: 0 24px 60px rgba(150,206,180,0.2); }
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 64px; line-height: 1;
+  background: linear-gradient(135deg, #fff, rgba(255,255,255,0.6));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-suffix { font-family: 'Bebas Neue', sans-serif; font-size: 40px; }
+.stat-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 8px; font-weight: 500; }
+
+/* ── ABOUT ── */
+#about { padding-top: 120px; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.about-text { font-size: 17px; color: rgba(255,255,255,0.75); line-height: 1.85; }
+.about-text p + p { margin-top: 16px; }
+.highlight { color: var(--c2); font-weight: 600; }
+.about-competencies { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.comp-pill {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 100px; padding: 8px 18px;
+  font-size: 13px; font-weight: 500;
+  transition: all 0.25s; cursor: none;
+}
+.comp-pill:hover {
+  background: var(--c1); color: var(--dark);
+  border-color: var(--c1);
+  transform: scale(1.08) rotate(-1deg);
+}
+
+/* WAVY DIVIDER */
+.wavy {
+  width: 100%; overflow: hidden; line-height: 0;
+  background: var(--dark);
+}
+.wavy svg { display: block; }
+
+/* ── TIMELINE ── */
+#experience { background: var(--mid); padding: 100px 0; }
+.exp-inner { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+.timeline { position: relative; padding-left: 40px; }
+.timeline::before {
+  content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(180deg, var(--c1), var(--c2), var(--c3), var(--c4), var(--c5));
+}
+
+.t-item {
+  position: relative; margin-bottom: 48px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px; padding: 28px 32px;
+  transition: all 0.3s; cursor: none;
+}
+.t-item:hover {
+  background: rgba(255,255,255,0.07);
+  transform: translateX(8px);
+  border-color: rgba(255,255,255,0.15);
+}
+.t-item:nth-child(1):hover { box-shadow: -4px 0 0 var(--c1), 0 12px 40px rgba(0,0,0,0.3); border-left-color: var(--c1); }
+.t-item:nth-child(2):hover { box-shadow: -4px 0 0 var(--c2), 0 12px 40px rgba(0,0,0,0.3); border-left-color: var(--c2); }
+.t-item:nth-child(3):hover { box-shadow: -4px 0 0 var(--c3), 0 12px 40px rgba(0,0,0,0.3); border-left-color: var(--c3); }
+.t-item:nth-child(4):hover { box-shadow: -4px 0 0 var(--c4), 0 12px 40px rgba(0,0,0,0.3); border-left-color: var(--c4); }
+.t-item:nth-child(5):hover { box-shadow: -4px 0 0 var(--c5), 0 12px 40px rgba(0,0,0,0.3); border-left-color: var(--c5); }
+.t-item:nth-child(6):hover { box-shadow: -4px 0 0 var(--c6), 0 12px 40px rgba(0,0,0,0.3); border-left-color: var(--c6); }
+
+.t-dot {
+  position: absolute; left: -47px; top: 32px;
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 3px solid var(--dark);
+  transition: transform 0.3s;
+}
+.t-item:hover .t-dot { transform: scale(1.5); }
+.t-item:nth-child(1) .t-dot { background: var(--c1); }
+.t-item:nth-child(2) .t-dot { background: var(--c2); }
+.t-item:nth-child(3) .t-dot { background: var(--c3); }
+.t-item:nth-child(4) .t-dot { background: var(--c4); }
+.t-item:nth-child(5) .t-dot { background: var(--c5); }
+.t-item:nth-child(6) .t-dot { background: var(--c6); }
+
+.t-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
+.t-company { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.03em; }
+.t-dates { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 500; background: rgba(255,255,255,0.06); padding: 4px 12px; border-radius: 100px; }
+.t-role { font-size: 13px; font-weight: 600; margin: 4px 0 12px; opacity: 0.6; letter-spacing: 0.05em; text-transform: uppercase; }
+.t-body { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.75; }
+.t-toggle {
+  font-size: 12px; font-weight: 600; color: var(--c3);
+  cursor: none; display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 8px; transition: opacity 0.2s;
+}
+.t-toggle:hover { opacity: 0.7; }
+.t-toggle .arr { transition: transform 0.3s; }
+.t-item.open .t-toggle .arr { transform: rotate(180deg); }
+.t-expand { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, opacity 0.4s; opacity: 0; }
+.t-item.open .t-expand { max-height: 800px; opacity: 1; }
+.t-bullets { list-style: none; padding: 12px 0 0; }
+.t-bullets li { padding: 5px 0 5px 20px; position: relative; font-size: 13.5px; color: rgba(255,255,255,0.65); }
+.t-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--c3); }
+.t-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.t-tag {
+  font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 100px;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+  transition: all 0.2s;
+}
+.t-tag:hover { background: var(--c2); color: var(--dark); border-color: var(--c2); transform: scale(1.1); }
+
+/* ── ACHIEVEMENTS ── */
+#achievements { padding: 100px 0; position: relative; z-index: 1; }
+.ach-inner { max-width: 1100px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 2; }
+.ach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+.ach-card {
+  border-radius: 16px; padding: 28px;
+  position: relative; overflow: hidden;
+  cursor: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.ach-card:hover { transform: translateY(-8px) rotate(1deg); }
+.ach-card:nth-child(odd):hover { transform: translateY(-8px) rotate(-1deg); }
+.ach-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: inherit; filter: brightness(1.15);
+  opacity: 0; transition: opacity 0.3s;
+}
+.ach-card:hover::before { opacity: 1; }
+.ach-card:nth-child(1) { background: linear-gradient(135deg, #FF6B6B, #ee5a24); grid-column: 1 / -1; display: flex; gap: 24px; align-items: center; }
+.ach-card:nth-child(2) { background: linear-gradient(135deg, #1a1a2e, #16213e); border: 1px solid rgba(255,255,255,0.1); }
+.ach-card:nth-child(3) { background: linear-gradient(135deg, #0f3460, #533483); }
+.ach-card:nth-child(4) { background: linear-gradient(135deg, #1a2a1a, #2d5a27); border: 1px solid rgba(78,205,196,0.3); }
+.ach-card:nth-child(5) { background: linear-gradient(135deg, #2a1a0f, #7d5a1e); border: 1px solid rgba(255,230,109,0.3); }
+.ach-card:nth-child(6) { background: linear-gradient(135deg, #1a1a2e, #2d1b69); border: 1px solid rgba(150,110,255,0.3); }
+.ach-card:nth-child(7) { background: linear-gradient(135deg, #1a2a2a, #0d4a4a); border: 1px solid rgba(69,183,209,0.3); }
+
+.ach-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 72px; line-height: 1; color: rgba(255,255,255,0.15);
+  position: absolute; bottom: -8px; right: 16px;
+}
+.ach-text { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.9); position: relative; z-index: 1; }
+.ach-feat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 100px; line-height: 0.85; color: rgba(255,255,255,0.9);
+  white-space: nowrap; flex-shrink: 0;
+}
+
+/* ── SKILLS ── */
+#skills { background: var(--mid); padding: 100px 0; }
+.skills-inner { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.skill-group h3 {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-bottom: 16px;
+  padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.skill-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-pill {
+  padding: 7px 16px; border-radius: 100px;
+  font-size: 13px; font-weight: 500;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.2s; cursor: none;
+}
+.skill-pill:hover {
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.skill-pill:nth-child(3n+1):hover { background: var(--c1); border-color: var(--c1); color: var(--dark); }
+.skill-pill:nth-child(3n+2):hover { background: var(--c3); border-color: var(--c3); color: var(--dark); }
+.skill-pill:nth-child(3n):hover { background: var(--c2); border-color: var(--c2); color: var(--dark); }
+
+/* ── PARALLAX BAND ── */
+.parallax-band {
+  overflow: hidden; padding: 60px 0;
+  background: linear-gradient(135deg, var(--c1), var(--c2), var(--c3), var(--c4));
+  position: relative;
+}
+.parallax-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 80px; color: rgba(0,0,0,0.15);
+  white-space: nowrap; letter-spacing: 0.05em;
+  animation: marquee 12s linear infinite;
+  display: inline-block;
+}
+.parallax-text span { color: rgba(0,0,0,0.35); }
+@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ── FOOTER ── */
+footer {
+  background: #0d0d1a;
+  padding: 80px 40px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 96px);
+  background: linear-gradient(135deg, var(--c1), var(--c2), var(--c3));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  background-size: 200% 200%; animation: gradientShift 3s ease infinite;
+}
+footer p { color: rgba(255,255,255,0.3); font-size: 14px; margin-top: 12px; }
+footer a { color: var(--c3); text-decoration: none; transition: color 0.2s; }
+footer a:hover { color: var(--c2); }
+
+/* ── FIREWORKS ── */
+.firework-canvas {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+}
+.confetti-piece {
+  position: fixed;
+  width: 10px; height: 10px;
+  top: -20px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: confettiFall linear forwards;
+}
+@keyframes confettiFall {
+  0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg) translateX(var(--sway)); opacity: 0; }
+}
+
+/* ── RIPPLE ── */
+.ripple {
+  position: fixed; border-radius: 50%;
+  pointer-events: none; z-index: 9997;
+  animation: rippleOut 0.6s ease-out forwards;
+}
+@keyframes rippleOut {
+  0% { transform: scale(0); opacity: 0.6; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px) {
+  section { padding: 60px 20px; }
+  .about-grid, .ach-grid, .skills-grid { grid-template-columns: 1fr; }
+  .ach-card:nth-child(1) { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-dot"></div>
+<div id="cursor-trail"></div>
+
+<!-- FLOATING BG SHAPES -->
+<div class="bg-shapes" id="bgShapes"></div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text">BEN ELSON TALENT ACQUISITION</div>
+  <div class="hero-bg-text">GLOBAL TA LEADER EMEA APAC</div>
+
+  <div class="hero-tag">🌍 Global TA Leader · EMEA & APAC</div>
+  <h1 class="hero-name">Ben Elson</h1>
+  <p class="hero-title">Global Talent Acquisition Leader</p>
+
+  <div class="typewriter-wrap">
+    <span class="typewriter-prefix">Expert in </span><span id="typewriter"></span>
+  </div>
+
+  <div class="hero-links">
+    <a href="mailto:Benelson82@Gmail.com" class="hero-btn primary">
+      ✉ Get in Touch
+    </a>
+    <a href="https://linkedin.com/in/belson" target="_blank" class="hero-btn secondary">
+      ⟶ LinkedIn
+    </a>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>SCROLL</span>
+    <span class="scroll-arrow">↓</span>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#about">About</a>
+    <a href="#stats">Stats</a>
+    <a href="#experience">Experience</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#skills">Skills</a>
+  </div>
+</nav>
+
+<!-- STATS BAND -->
+<div id="stats" style="background:linear-gradient(135deg,#16213e,#0d1b2a);">
+  <div class="stats-wrap">
+    <div class="stats-grid">
+      <div class="stat-card fly-up d1">
+        <div class="stat-num"><span class="count" data-target="15">0</span><span class="stat-suffix">+</span></div>
+        <div class="stat-label">Years in TA</div>
+      </div>
+      <div class="stat-card fly-up d2">
+        <div class="stat-num"><span class="count" data-target="700">0</span><span class="stat-suffix">+</span></div>
+        <div class="stat-label">Annual Hires at Peak</div>
+      </div>
+      <div class="stat-card fly-up d3">
+        <div class="stat-num"><span class="count" data-target="25">0</span></div>
+        <div class="stat-label">FTE Team Size</div>
+      </div>
+      <div class="stat-card fly-up d4">
+        <div class="stat-num">£<span class="count" data-target="1">0</span><span class="stat-suffix">M+</span></div>
+        <div class="stat-label">Agency Savings</div>
+      </div>
+      <div class="stat-card fly-up d5">
+        <div class="stat-num"><span class="count" data-target="20">0</span><span class="stat-suffix">+</span></div>
+        <div class="stat-label">Countries Covered</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-eyebrow" style="color:var(--c1);">01 · Profile</div>
+  <div class="section-title fly-left">About<br><span style="color:var(--c2)">Me</span></div>
+
+  <div class="about-grid">
+    <div class="about-text fly-left d2">
+      <p>High-performing Talent Acquisition Leader with over <span class="highlight">15 years of experience</span> building and scaling global TA functions within high-growth industries including SaaS, Life Sciences, and Technology Consulting.</p>
+      <p>Proven track record in leading <span class="highlight">large-scale TA transformations</span>, integrating advanced data analytics to drive commercial outcomes and workforce planning.</p>
+      <p>Consistently promoted within all roles and organisations throughout my career — <span class="highlight">often within 24 months</span> in role.</p>
+
+      <div class="about-competencies">
+        <span class="comp-pill">Strategic Leadership</span>
+        <span class="comp-pill">Executive Search</span>
+        <span class="comp-pill">Workforce Planning</span>
+        <span class="comp-pill">TA Transformation</span>
+        <span class="comp-pill">Talent Intelligence</span>
+        <span class="comp-pill">People Development</span>
+        <span class="comp-pill">Operational Excellence</span>
+        <span class="comp-pill">DEI Hiring</span>
+      </div>
+    </div>
+
+    <div class="fly-right d2" style="display:flex;flex-direction:column;gap:16px;">
+      <div style="background:rgba(255,107,107,0.1);border:1px solid rgba(255,107,107,0.25);border-radius:16px;padding:24px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--c1);margin-bottom:8px;">Specialisms</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.7;">AI/ML · NLP · Computer Vision · Software Engineering · Data Science · C-Suite & VP Search · Early Talent Programmes</div>
+      </div>
+      <div style="background:rgba(78,205,196,0.1);border:1px solid rgba(78,205,196,0.25);border-radius:16px;padding:24px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--c3);margin-bottom:8px;">Regions</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.7);">United Kingdom · EMEA (20+ countries) · APAC · North America</div>
+      </div>
+      <div style="background:rgba(255,230,109,0.1);border:1px solid rgba(255,230,109,0.25);border-radius:16px;padding:24px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--c2);margin-bottom:8px;">Industries</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.7);">SaaS · Life Sciences · Tech Consulting · Financial Research · Media</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARALLAX BAND -->
+<div class="parallax-band">
+  <div class="parallax-text">
+    TALENT ACQUISITION &nbsp;<span>·</span>&nbsp; GLOBAL LEADER &nbsp;<span>·</span>&nbsp; EMEA &amp; APAC &nbsp;<span>·</span>&nbsp; AI/ML HIRING &nbsp;<span>·</span>&nbsp; TA TRANSFORMATION &nbsp;<span>·</span>&nbsp; EXECUTIVE SEARCH &nbsp;<span>·</span>&nbsp;
+    TALENT ACQUISITION &nbsp;<span>·</span>&nbsp; GLOBAL LEADER &nbsp;<span>·</span>&nbsp; EMEA &amp; APAC &nbsp;<span>·</span>&nbsp; AI/ML HIRING &nbsp;<span>·</span>&nbsp; TA TRANSFORMATION &nbsp;<span>·</span>&nbsp; EXECUTIVE SEARCH &nbsp;<span>·</span>&nbsp;
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div id="experience">
+  <div class="exp-inner">
+    <div style="padding-top:100px;">
+      <div class="section-eyebrow" style="color:var(--c2);">02 · Career</div>
+      <div class="section-title fly-left">Experience</div>
+    </div>
+    <div class="timeline">
+
+      <div class="t-item fly-right d1" id="tj1">
+        <div class="t-dot"></div>
+        <div class="t-header">
+          <div class="t-company">UL Solutions <span style="font-size:16px;opacity:0.4;font-family:'Outfit',sans-serif;font-weight:300;">(NYSE: ULS)</span></div>
+          <div class="t-dates">Feb 2021 – May 2025</div>
+        </div>
+        <div class="t-role">Senior Manager, Talent Acquisition – EMEA / APAC</div>
+        <div class="t-body">Tasked by the Global VP of TA to deconstruct and rebuild the entire EMEA TA team from scratch. Built a high-performing team of 10–11 Senior TA Specialists driving 700+ annual hires.</div>
+        <div class="t-toggle" onclick="toggleT('tj1')"><span>View detail</span><span class="arr">▼</span></div>
+        <div class="t-expand">
+          <ul class="t-bullets">
+            <li>Led 20+ Senior TA Advisors & Sourcers across a geographically dispersed team</li>
+            <li>Partnered with HR and Finance on Strategic Workforce Planning aligned to global growth</li>
+            <li>Developed real-time PowerBI dashboards providing market intelligence to C-suite</li>
+            <li>Refined assessment frameworks for AI/ML and Engineering roles with coding evaluations</li>
+            <li>Launched UL's company-wide TA Quarterly Reviews with 360° "Story-Telling" approach</li>
+          </ul>
+          <div class="t-tags">
+            <span class="t-tag">£1M Saved</span>
+            <span class="t-tag">25% → &lt;3% Agency</span>
+            <span class="t-tag">PowerBI</span>
+            <span class="t-tag">Top 1% Leader</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-item fly-left d1" id="tj2">
+        <div class="t-dot"></div>
+        <div class="t-header">
+          <div class="t-company">IQVIA <span style="font-size:16px;opacity:0.4;font-family:'Outfit',sans-serif;font-weight:300;">(NYSE: IQV)</span></div>
+          <div class="t-dates">Apr 2016 – Feb 2021</div>
+        </div>
+        <div class="t-role">Director, Talent Acquisition – EMEA / APAC</div>
+        <div class="t-body">Built IQVIA's Technology-focused TA team from 0 to 10 FTE, embedding TA into the business and building a true partnership model with senior leaders.</div>
+        <div class="t-toggle" onclick="toggleT('tj2')"><span>View detail</span><span class="arr">▼</span></div>
+        <div class="t-expand">
+          <ul class="t-bullets">
+            <li>Built the EMEA TA function from scratch targeting AI/ML, ML & Data Science talent</li>
+            <li>Established strategic TA partnership model across 20+ countries</li>
+            <li>Designed company-wide sourcing strategy enabling "warm bench" hiring capabilities</li>
+            <li>Championed enterprise TA transformation — removed RPO, internalised recruitment</li>
+            <li>Launched first-ever 360 experience surveys across the organisation</li>
+          </ul>
+          <div class="t-tags">
+            <span class="t-tag">0 → 10 FTE</span>
+            <span class="t-tag">20+ Countries</span>
+            <span class="t-tag">RPO Removal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-item fly-right d2" id="tj3">
+        <div class="t-dot"></div>
+        <div class="t-header">
+          <div class="t-company">Spengler Fox</div>
+          <div class="t-dates">Jul 2015 – Feb 2016</div>
+        </div>
+        <div class="t-role">Practice Group Leader – Tech (Executive Search)</div>
+        <div class="t-body">Led senior-level retained executive search projects for enterprise tech clients, managing high-impact C-suite placements.</div>
+        <div class="t-toggle" onclick="toggleT('tj3')"><span>View detail</span><span class="arr">▼</span></div>
+        <div class="t-expand">
+          <ul class="t-bullets"><li>Managed end-to-end executive search across global enterprise tech clients</li></ul>
+        </div>
+      </div>
+
+      <div class="t-item fly-left d2" id="tj4">
+        <div class="t-dot"></div>
+        <div class="t-header">
+          <div class="t-company">Forrester Research</div>
+          <div class="t-dates">Apr 2010 – Jul 2015</div>
+        </div>
+        <div class="t-role">Senior TA Manager – Europe & Asia</div>
+        <div class="t-body">Spearheaded the launch of Forrester's first-ever EMEA TA team, scaled across EMEA and APAC to support international growth.</div>
+        <div class="t-toggle" onclick="toggleT('tj4')"><span>View detail</span><span class="arr">▼</span></div>
+        <div class="t-expand">
+          <ul class="t-bullets">
+            <li>Built Forrester's first-ever EMEA TA function from zero</li>
+            <li>Scaled the team across EMEA and APAC to support developing regions</li>
+            <li>Established repeatable best practices for hiring across all teams</li>
+          </ul>
+          <div class="t-tags"><span class="t-tag">First EMEA Team</span><span class="t-tag">APAC Expansion</span></div>
+        </div>
+      </div>
+
+      <div class="t-item fly-right d3" id="tj5">
+        <div class="t-dot"></div>
+        <div class="t-header">
+          <div class="t-company">Microsoft <span style="font-size:14px;opacity:0.4;font-family:'Outfit',sans-serif;font-weight:300;">(via Barkers RPO)</span></div>
+          <div class="t-dates">Oct 2008 – Apr 2010</div>
+        </div>
+        <div class="t-role">Onsite In-House Recruiter – EMEA</div>
+        <div class="t-body">Tech and GTM hiring across EMEA for the MSN organisation. Supported out-placement during Microsoft's first-ever public redundancies.</div>
+      </div>
+
+      <div class="t-item fly-left d3" id="tj6">
+        <div class="t-dot"></div>
+        <div class="t-header">
+          <div class="t-company">Lipton Fleming</div>
+          <div class="t-dates">Feb 2005 – Sep 2008</div>
+        </div>
+        <div class="t-role">Recruitment Consultant – UK</div>
+        <div class="t-body">Sourcing and hiring media sales professionals across Radio, Outdoor, Print and Digital.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="ach-inner">
+    <div class="section-eyebrow" style="color:var(--c3);">03 · Impact</div>
+    <div class="section-title fly-right">Standout<br><span style="color:var(--c3)">Achievements</span></div>
+
+    <div class="ach-grid">
+      <div class="ach-card zoom-in d1">
+        <div class="ach-feat-num">Top 1%</div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:8px;opacity:0.8;">UL Solutions Global Recognition</div>
+          <div class="ach-text">Recognised in the top 1% of all people leaders across UL Solutions globally — a reflection of team culture, development, and results delivered.</div>
+        </div>
+      </div>
+      <div class="ach-card fly-up d1">
+        <div class="ach-number">01</div>
+        <div class="ach-text">From zero to fully operational — stood up IQVIA's EMEA TA function from scratch, covering Engineering and AI/ML hiring across 20+ countries.</div>
+      </div>
+      <div class="ach-card fly-up d2">
+        <div class="ach-number">02</div>
+        <div class="ach-text">Reduced agency reliance from 25% to under 3% at UL Solutions — delivering approximately £1M in cost savings over 4 years.</div>
+      </div>
+      <div class="ach-card fly-up d3">
+        <div class="ach-number">03</div>
+        <div class="ach-text">Transformed how TA was measured at UL Solutions — launching PowerBI dashboards delivering real-time talent and market intelligence to the C-suite.</div>
+      </div>
+      <div class="ach-card fly-left d2">
+        <div class="ach-number">04</div>
+        <div class="ach-text">Launched the first-ever full 360 experience surveys at both UL Solutions and IQVIA, transforming candidate and hiring manager feedback loops.</div>
+      </div>
+      <div class="ach-card fly-right d2">
+        <div class="ach-number">05</div>
+        <div class="ach-text">Pioneered Forrester Research's first-ever EMEA & APAC TA team from the ground up, directly enabling international growth ambitions.</div>
+      </div>
+      <div class="ach-card fly-up d4" style="grid-column: 1 / -1; background: linear-gradient(135deg, #0f3460, #1a0a4a); border: 1px solid rgba(78,205,196,0.2);">
+        <div class="ach-number">06</div>
+        <div class="ach-text" style="font-size:16px;">Stood up a Global Sourcing team of 8 at UL Solutions in under 6 months — turning reactive hiring into a proactive, pipeline-first operation at scale.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<div id="skills">
+  <div class="skills-inner" style="padding-top:100px;padding-bottom:100px;">
+    <div class="section-eyebrow" style="color:var(--c4);">04 · Expertise</div>
+    <div class="section-title fly-left">Key Skills &<br><span style="color:var(--c4)">Expertise</span></div>
+
+    <div class="skills-grid">
+      <div class="skill-group fly-up d1">
+        <h3>TA Strategy & Leadership</h3>
+        <div class="skill-pills">
+          <span class="skill-pill">Global TA Strategy</span>
+          <span class="skill-pill">Workforce Planning</span>
+          <span class="skill-pill">Executive Search</span>
+          <span class="skill-pill">Change Management</span>
+          <span class="skill-pill">TA Transformation</span>
+          <span class="skill-pill">RPO Management</span>
+          <span class="skill-pill">Team Building</span>
+          <span class="skill-pill">Coaching & Mentorship</span>
+        </div>
+      </div>
+      <div class="skill-group fly-up d2">
+        <h3>Technical Domains</h3>
+        <div class="skill-pills">
+          <span class="skill-pill">AI / ML Hiring</span>
+          <span class="skill-pill">NLP & Computer Vision</span>
+          <span class="skill-pill">Software Engineering</span>
+          <span class="skill-pill">Data Science</span>
+          <span class="skill-pill">C-Suite Hiring</span>
+          <span class="skill-pill">Early Talent Programmes</span>
+        </div>
+      </div>
+      <div class="skill-group fly-up d3">
+        <h3>Data & Analytics</h3>
+        <div class="skill-pills">
+          <span class="skill-pill">PowerBI</span>
+          <span class="skill-pill">Recruitment Analytics</span>
+          <span class="skill-pill">KPI Reporting</span>
+          <span class="skill-pill">Market Intelligence</span>
+          <span class="skill-pill">Benchmarking</span>
+          <span class="skill-pill">P&L Management</span>
+        </div>
+      </div>
+      <div class="skill-group fly-up d4">
+        <h3>Candidate Experience & DEI</h3>
+        <div class="skill-pills">
+          <span class="skill-pill">DEI Inclusive Hiring</span>
+          <span class="skill-pill">Assessment Design</span>
+          <span class="skill-pill">Employer Branding</span>
+          <span class="skill-pill">360 Experience Surveys</span>
+          <span class="skill-pill">ATS / CRM</span>
+          <span class="skill-pill">Coding Evaluations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-name">Ben Elson</div>
+  <p>Global Talent Acquisition Leader · EMEA & APAC</p>
+  <p style="margin-top:12px;">
+    <a href="mailto:Benelson82@Gmail.com">Benelson82@Gmail.com</a>
+    &nbsp;·&nbsp;
+    <a href="https://linkedin.com/in/belson" target="_blank">linkedin.com/in/belson</a>
+  </p>
+  <p style="margin-top:32px;font-size:11px;opacity:0.15;">🎉 You made it to the bottom!</p>
+</footer>
+
+<script>
+// ── CUSTOM CURSOR ──
+const cur = document.getElementById('cursor');
+const dot = document.getElementById('cursor-dot');
+const trail = document.getElementById('cursor-trail');
+let mx=0,my=0,tx=0,ty=0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cur.style.left = mx-10+'px'; cur.style.top = my-10+'px';
+  dot.style.left = mx-3+'px'; dot.style.top = my-3+'px';
+});
+function animTrail() {
+  tx += (mx-tx)*0.1; ty += (my-ty)*0.1;
+  trail.style.left = tx-20+'px'; trail.style.top = ty-20+'px';
+  requestAnimationFrame(animTrail);
+}
+animTrail();
+
+// ── CLICK RIPPLE ──
+document.addEventListener('click', e => {
+  const r = document.createElement('div');
+  r.className = 'ripple';
+  r.style.cssText = `left:${e.clientX-20}px;top:${e.clientY-20}px;width:40px;height:40px;background:rgba(255,107,107,0.4)`;
+  document.body.appendChild(r);
+  setTimeout(() => r.remove(), 600);
+});
+
+// ── FLOATING BG SHAPES ──
+const colours = ['#FF6B6B','#FFE66D','#4ECDC4','#45B7D1','#96CEB4','#FF8B94'];
+for(let i=0;i<18;i++){
+  const s = document.createElement('div');
+  s.className = 'shape';
+  const size = 40 + Math.random()*160;
+  s.style.cssText = `
+    width:${size}px;height:${size}px;
+    left:${Math.random()*100}%;
+    background:${colours[Math.floor(Math.random()*colours.length)]};
+    animation-duration:${12+Math.random()*20}s;
+    animation-delay:${-Math.random()*20}s;
+  `;
+  document.getElementById('bgShapes').appendChild(s);
+}
+
+// ── TYPEWRITER ──
+const words = ['AI/ML Hiring','Executive Search','TA Transformation','Workforce Planning','Building Global Teams','Reducing Agency Spend'];
+let wi=0,ci=0,deleting=false;
+const tw = document.getElementById('typewriter');
+function type(){
+  const w = words[wi];
+  if(!deleting){ tw.textContent=w.slice(0,++ci); if(ci===w.length){deleting=true;setTimeout(type,1600);return;} }
+  else{ tw.textContent=w.slice(0,--ci); if(ci===0){deleting=false;wi=(wi+1)%words.length;} }
+  setTimeout(type, deleting?60:100);
+}
+type();
+
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      // trigger count-up when stats visible
+      if(e.target.closest('#stats') || e.target.classList.contains('count')){
+        document.querySelectorAll('.count').forEach(countUp);
+      }
+    }
+  });
+},{threshold:0.15});
+
+document.querySelectorAll('.fly-left,.fly-right,.fly-up,.fly-down,.zoom-in,.spin-in').forEach(el=>obs.observe(el));
+
+// ── COUNT UP ──
+let counted = false;
+function countUp(el){
+  if(el.dataset.done) return;
+  el.dataset.done = true;
+  const target = +el.dataset.target;
+  const duration = 1800;
+  const start = performance.now();
+  function update(now){
+    const p = Math.min((now-start)/duration,1);
+    const ease = 1-Math.pow(1-p,3);
+    el.textContent = Math.floor(ease*target);
+    if(p<1) requestAnimationFrame(update);
+    else el.textContent = target;
+  }
+  requestAnimationFrame(update);
+}
+
+const statsObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting && !counted){
+      counted=true;
+      document.querySelectorAll('.count').forEach(countUp);
+    }
+  });
+},{threshold:0.3});
+const statsEl = document.getElementById('stats');
+if(statsEl) statsObs.observe(statsEl);
+
+// ── TIMELINE TOGGLE ──
+function toggleT(id){
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+  const sp = el.querySelector('.t-toggle span:first-child');
+  sp.textContent = el.classList.contains('open') ? 'Hide detail' : 'View detail';
+}
+
+// ── CONFETTI ──
+function launchConfetti(){
+  const colours = ['#FF6B6B','#FFE66D','#4ECDC4','#45B7D1','#96CEB4','#FF8B94','#fff'];
+  const shapes = ['circle','square','triangle'];
+  for(let i=0;i<120;i++){
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    const colour = colours[Math.floor(Math.random()*colours.length)];
+    const size = 6+Math.random()*10;
+    const shape = shapes[Math.floor(Math.random()*shapes.length)];
+    const sway = (Math.random()-0.5)*400;
+    c.style.cssText = `
+      left:${Math.random()*100}vw;
+      width:${size}px;height:${size}px;
+      background:${colour};
+      border-radius:${shape==='circle'?'50%':shape==='square'?'2px':'0'};
+      --sway:${sway}px;
+      animation-duration:${2+Math.random()*2}s;
+      animation-delay:${Math.random()*0.5}s;
+    `;
+    if(shape==='triangle'){
+      c.style.background='transparent';
+      c.style.borderLeft=`${size/2}px solid transparent`;
+      c.style.borderRight=`${size/2}px solid transparent`;
+      c.style.borderBottom=`${size}px solid ${colour}`;
+    }
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(), 4000);
+  }
+}
+
+// ── FIREWORKS ──
+function launchFireworks() {
+  const canvas = document.createElement('canvas');
+  canvas.className = 'firework-canvas';
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+
+  const fireworkColours = ['#FF6B6B','#FFE66D','#4ECDC4','#45B7D1','#96CEB4','#FF8B94','#fff','#c9a84c','#a29bfe','#fd79a8'];
+  const particles = [];
+
+  function createBurst(x, y) {
+    const colour = fireworkColours[Math.floor(Math.random() * fireworkColours.length)];
+    const count = 80 + Math.floor(Math.random() * 40);
+    for (let i = 0; i < count; i++) {
+      const angle = (Math.PI * 2 / count) * i + Math.random() * 0.2;
+      const speed = 2 + Math.random() * 6;
+      particles.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        alpha: 1,
+        colour,
+        radius: 2 + Math.random() * 3,
+        gravity: 0.08 + Math.random() * 0.05,
+        decay: 0.012 + Math.random() * 0.008,
+        trail: [],
+      });
+    }
+  }
+
+  // Launch multiple bursts staggered
+  const launchPositions = [
+    [0.2, 0.3], [0.8, 0.25], [0.5, 0.15],
+    [0.15, 0.5], [0.85, 0.45], [0.35, 0.2],
+    [0.65, 0.35], [0.5, 0.5], [0.25, 0.4], [0.75, 0.2]
+  ];
+  launchPositions.forEach(([xr, yr], i) => {
+    setTimeout(() => createBurst(xr * canvas.width, yr * canvas.height), i * 220);
+  });
+
+  let frame = 0;
+  function draw() {
+    frame++;
+    ctx.fillStyle = 'rgba(0,0,0,0.18)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.trail.push({ x: p.x, y: p.y });
+      if (p.trail.length > 5) p.trail.shift();
+
+      // Draw trail
+      for (let t = 0; t < p.trail.length; t++) {
+        ctx.beginPath();
+        ctx.arc(p.trail[t].x, p.trail[t].y, p.radius * (t / p.trail.length) * 0.6, 0, Math.PI * 2);
+        ctx.fillStyle = p.colour + Math.floor((t / p.trail.length) * p.alpha * 80).toString(16).padStart(2,'0');
+        ctx.fill();
+      }
+
+      // Draw particle
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = p.colour + Math.floor(p.alpha * 255).toString(16).padStart(2,'0');
+      ctx.fill();
+
+      // Sparkle
+      if (Math.random() < 0.15) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius * 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = '#fff' + Math.floor(p.alpha * 80).toString(16).padStart(2,'0');
+        ctx.fill();
+      }
+
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += p.gravity;
+      p.vx *= 0.98;
+      p.alpha -= p.decay;
+
+      if (p.alpha <= 0) particles.splice(i, 1);
+    }
+
+    if (particles.length > 0 || frame < 120) {
+      requestAnimationFrame(draw);
+    } else {
+      canvas.remove();
+    }
+  }
+  draw();
+
+  setTimeout(() => canvas.remove(), 6000);
+}
+
+let fireworksFired = false;
+const achObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !fireworksFired) {
+      fireworksFired = true;
+      launchFireworks();
+      setTimeout(launchFireworks, 1800);
+    }
+  });
+}, { threshold: 0.2 });
+const achEl = document.getElementById('achievements');
+if (achEl) achObs.observe(achEl);
+
+
+const footerObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting && !confettiFired){
+      confettiFired = true;
+      launchConfetti();
+      setTimeout(launchConfetti,1000);
+    }
+  });
+},{threshold:0.5});
+const footerEl = document.getElementById('footer');
+if(footerEl) footerObs.observe(footerEl);
+
+// ── AUTO OPEN FIRST JOB ──
+setTimeout(()=>toggleT('tj1'),1200);
+</script>
+</body>
+</html>
